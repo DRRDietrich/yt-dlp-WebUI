@@ -13,10 +13,10 @@ $listPage = "list.php";
 
 // Enable password to access the panel
 // 1 -> enable 0 -> disable
-$security = 1; 
+$security = 0; 
 
 // PHP::md5(); You can use md5.php to generate an other one
 // default : root
-$secretPassword = "63a9f0ea7bb98050796b649e85481845";
+$secretPassword = "1234567812b93450566b789e12483445";
 
 ?>

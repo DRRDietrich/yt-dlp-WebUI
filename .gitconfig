@@ -1,0 +1,9 @@
+[gui]
+	recentrepo = /home/daniel/git/Beyond_Passwords
+	recentrepo = /home/daniel/git/secrets
+[user]
+	name = DRRDietrich
+	email = Daniel@DRRDietrich.de
+[global]
+[diff]
+	tool = diffuse
