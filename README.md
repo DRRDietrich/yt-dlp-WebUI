@@ -1,7 +1,7 @@
 # Youtube-dl WebUI
 
-![Main](https://github.com/p1rox/Youtube-dl-WebUI/raw/master/img/main.png)
-![List](https://github.com/p1rox/Youtube-dl-WebUI/raw/master/img/list.png)
+![Main](https://raw.githubusercontent.com/DRRDietrich/Youtube-dl-WebUI/master/img/de/main.png)
+![List](https://raw.githubusercontent.com/DRRDietrich/Youtube-dl-WebUI/master/img/de/list.png)
 
 ## Description
 Youtube-dl WebUI is a small web interface for youtube-dl. It allows you to host your own video downloader. After the download you can stream your videos from your web browser or save it on your computer directly from the list page.
