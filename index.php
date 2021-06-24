@@ -55,7 +55,7 @@
 		$f = 'bestvideo+bestaudio';
 		break;
 	}
-        $cmd = 'youtube-dl -f ' . $f . ' -o ' . escapeshellarg($folder.'%(title)s-%(uploader)s.%(ext)s') . ' ' . escapeshellarg($url) . ' 2>/dev/null >/dev/null &';
+        $cmd = 'youtube-dl -i -f ' . $f . ' -o ' . escapeshellarg($folder.'%(title)s-%(uploader)s.%(ext)s') . ' ' . escapeshellarg($url) . ' 2>/dev/null >/dev/null &';
         shell_exec($cmd);
         echo '<div class="alert alert-success">
               <strong>Download gestartet!</strong> <a href="'.$listPage.'" class="alert-link">Zu den Dateien</a>.
