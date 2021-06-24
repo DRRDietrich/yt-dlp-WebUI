@@ -55,23 +55,11 @@
 		$f = 'bestvideo+bestaudio';
 		break;
 	}
-        $cmd = 'nohup youtube-dl -f ' . $f . ' -o ' . escapeshellarg($folder.'%(title)s-%(uploader)s.%(ext)s') . ' ' . escapeshellarg($url) . ' 2>&1';
-        exec($cmd, $output, $ret);
-        if($ret == 0)
-        {
-            echo '<div class="alert alert-success">
-                    <strong>Download erfolgreich!</strong> <a href="'.$listPage.'" class="alert-link">Zu den Dateien</a>.
-                </div>';
-        }
-        else{
-            echo '<div class="alert alert-dismissable alert-danger">
-                    <strong>Oh!</strong> Etwas hat nicht funktioniert. Fehlercode: <br>';
-            foreach($output as $out)
-            {
-                echo $out . '<br>'; 
-            }
-            echo '</div>';
-        }
+        $cmd = 'youtube-dl -f ' . $f . ' -o ' . escapeshellarg($folder.'%(title)s-%(uploader)s.%(ext)s') . ' ' . escapeshellarg($url) . ' 2>/dev/null >/dev/null &';
+        shell_exec($cmd);
+        echo '<div class="alert alert-success">
+              <strong>Download gestartet!</strong> <a href="'.$listPage.'" class="alert-link">Zu den Dateien</a>.
+              </div>';
     }
     elseif(isset($_SESSION['logged']) && $_SESSION['logged'] == 1)
     { ?>

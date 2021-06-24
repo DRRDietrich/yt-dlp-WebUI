@@ -4,10 +4,12 @@
     require_once("sessions.php");
     require_once("utilities.php");
 
+    startSession($_POST['passwd']);
     if(isset($_GET['logout']) && $_GET['logout'] == 1) endSession();
     if(isset($_POST['downall'])) {
         $zip = new ZipArchive();
         $filename = "./Archiv.zip";
+	set_time_limit(0);
         if ($zip->open($filename, ZipArchive::CREATE)!==TRUE) {
             exit("<$filename> kann nicht erstellt werden\n");
         }
@@ -61,13 +63,29 @@ if(isset($_SESSION['logged']) && $_SESSION['logged'] == 1)
             }
         }
     }
+    if(isset($_GET['fileToDel'])) {
+      $fileToDel = urldecode($_GET['fileToDel']);
+      if($fileToDel == "Archiv.zip" && file_exists("Archiv.zip") && ! unlink("Archiv.zip")){
+            echo '<div class="panel panel-danger">';
+            echo '<div class="panel-heading"><h3 class="panel-title">Datei löschen: Archiv.zip</h3></div>';
+            echo '<div class="panel-body">Die Datei Archiv.zip konnte nicht gelöscht werden!</div>';
+            echo '</div>';
+      } 
+      if(file_exists($folder.$fileToDel) && ! unlink($folder.$fileToDel)) {
+                echo '<div class="panel panel-danger">';
+                echo '<div class="panel-heading"><h3 class="panel-title">Datei löschen: '.$fileToDel.'</h3></div>';
+                echo '<div class="panel-body">Die Datei '.$fileToDel.' konnte nicht gelöscht werden!</div>';
+                echo '</div>';
+      }      
+    }
     ?>
         <h2>Liste der verfügbaren Dateien:</h2>
-            <table class="table table-striped table-hover ">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th style="min-width:800px; height:35px">Titel</th>
                         <th style="min-width:80px">Größe</th>
+                        <th style="min-width:80px">Löschen</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,14 +94,16 @@ if(isset($_SESSION['logged']) && $_SESSION['logged'] == 1)
             {
                 $filename = str_replace($folder, "", $file); // Need to fix accent problem with something like this : utf8_encode
                 echo "<tr>"; //New line
-                echo "<td height=\"30px\">$filename</td>"; //1st col
+                echo "<td height=\"30px\"><a href=\"$folder".htmlentities($filename)."\">$filename</a></td>"; //1st col
                 echo "<td>".human_filesize(filesize($folder.$filename))."</td>"; //2nd col
+		echo "<td><a href=\"".$listPage."?fileToDel=".urlencode($filename)."\" class=\"text-danger\">Löschen</a></td>"; //3rd col
                 echo "</tr>"; //End line
             }
 	    if(file_exists("Archiv.zip")) {
                 echo "<tr>"; //New line
                 echo "<td height=\"30px\"><a href=\"Archiv.zip\">Archiv.zip</a></td>"; //1st col
                 echo "<td>".human_filesize(filesize("Archiv.zip"))."</td>"; //2nd col
+		echo "<td><a href=\"".$listPage."?fileToDel=".urlencode('Archiv.zip')."\" class=\"text-danger\">Löschen</a></td>"; //3rd col
                 echo "</tr>"; //End line
             }
 ?>
