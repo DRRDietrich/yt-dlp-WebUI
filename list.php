@@ -18,6 +18,11 @@
         }
         $zip->close();
     }
+    if(isset($_POST['kill'])) {
+	$cmd = 'killall -9 youtube-dl';
+        shell_exec($cmd);
+
+    }
 ?>
 <html>
     <head>
@@ -94,7 +99,7 @@ if(isset($_SESSION['logged']) && $_SESSION['logged'] == 1)
             {
                 $filename = str_replace($folder, "", $file); // Need to fix accent problem with something like this : utf8_encode
                 echo "<tr>"; //New line
-                echo "<td height=\"30px\"><a href=\"$folder".htmlentities($filename)."\">$filename</a></td>"; //1st col
+                echo "<td height=\"30px\"><a href='$folder".rawurlencode($filename)."'>$filename</a></td>"; //1st col
                 echo "<td>".human_filesize(filesize($folder.$filename))."</td>"; //2nd col
 		echo "<td><a href=\"".$listPage."?fileToDel=".urlencode($filename)."\" class=\"text-danger\">Löschen</a></td>"; //3rd col
                 echo "</tr>"; //End line
@@ -109,15 +114,18 @@ if(isset($_SESSION['logged']) && $_SESSION['logged'] == 1)
 ?>
                 </tbody>
             </table>
-	    <div><form action="list.php" method="post"><input type="submit" name="downall" value="Download Archiv erstellen" /></form><br/>
-            <form action="list.php" method="post"><input type="submit" name="delall" value="Alle Löschen" /></form></div>
+	    <div>
+                <form action="list.php" method="post">
+                    <input type="submit" class="btn btn-info" name="downall" value="Archiv erstellen" />
+                    <input type="submit" class="btn btn-warning" name="kill" value="Download stoppen" />
+                    <input type="submit" class="btn btn-danger" name="delall" value="Alle Löschen" />
+                </form>
+            </div>
 <?php
 } 
 else {
     echo '<div class="alert alert-danger"><strong>Zugriff verweigert:</strong> Sie müssen sich anmelden!</div>';
 } ?>
-	    <br/>
-            <?php if(!isset($_GET['fileToDel'])) echo "<a href=".$mainPage.">Zurück zur Download-Seite</a>"; ?>
         </div><!-- End container -->
         <br>
     </body>

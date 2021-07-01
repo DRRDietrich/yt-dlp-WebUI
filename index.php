@@ -38,6 +38,11 @@
     {
         $url = $_GET['url'];
 	$format = $_GET['f'];
+	$playlist = $_GET['playlist'];
+	$plylst = '--no-playlist';
+	if (isset($playlist)) {
+		$plylst = '--yes-playlist';
+	} 
 	switch ($format) {
 	case 140: 
 		$f = 'bestaudio[ext=m4a]';
@@ -55,7 +60,7 @@
 		$f = 'bestvideo+bestaudio';
 		break;
 	}
-        $cmd = 'youtube-dl -i -f ' . $f . ' -o ' . escapeshellarg($folder.'%(title)s-%(uploader)s.%(ext)s') . ' ' . escapeshellarg($url) . ' 2>/dev/null >/dev/null &';
+        $cmd = 'youtube-dl -i -f ' . $f . ' ' . $plylst . ' ' . ' -o ' . escapeshellarg($folder.'%(title)s-%(uploader)s.%(ext)s') . ' ' . escapeshellarg($url) . ' 2>/dev/null >/dev/null &';
         shell_exec($cmd);
         echo '<div class="alert alert-success">
               <strong>Download gestartet!</strong> <a href="'.$listPage.'" class="alert-link">Zu den Dateien</a>.
@@ -69,6 +74,9 @@
                         <div class="col-lg-8">
                             <input class="form-control" id="url" name="url" placeholder="Link" type="text">
                         </div>
+                        <div class="col-lg-1">
+	        		<input type="checkbox" name="playlist" value="nein"> Playlist
+                        </div>
 			<div class="col-lg-2">
 			<select name="f">
 			  <option value="140">M4A (Audio-Only)</option>
@@ -78,7 +86,7 @@
                           <option value="999">BEST</option>
                         </select>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-1">
                         <button type="submit" class="btn btn-primary">Download</button>
                         </div>
                     </div>
