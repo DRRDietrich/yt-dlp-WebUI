@@ -4,12 +4,12 @@
 ![List](https://raw.githubusercontent.com/DRRDietrich/Youtube-dl-WebUI/master/img/de/list.png)
 
 ## Description
-Youtube-dl WebUI is a small web interface for youtube-dl. It allows you to host your own video downloader. After the download you can stream your videos from your web browser or save it on your computer directly from the list page.
+Youtube-dl WebUI is a small web interface for yt-dlp. It allows you to host your own video downloader. After the download you can stream your videos from your web browser or save it on your computer directly from the list page.
 
 ## Requirements
 - A web server (Apache or nginx)
 - PHP latest version should be fine.
-- [Youtube-dl](https://github.com/rg3/youtube-dl)
+- yt-dlp
 
 ## How to install ?
 1. Clone this repo in your web folder (ex: /var/www).
