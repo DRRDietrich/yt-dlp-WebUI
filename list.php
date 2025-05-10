@@ -1,10 +1,9 @@
-<!DOCTYPE html>
 <?php
     require_once("config.php"); 
     require_once("sessions.php");
     require_once("utilities.php");
 
-    startSession($_POST['passwd']);
+    startSession($_POST['passwd'] ?? '');
     if(isset($_GET['logout']) && $_GET['logout'] == 1) endSession();
     if(isset($_POST['downall'])) {
         $zip = new ZipArchive();
@@ -29,7 +28,7 @@
         <meta charset="utf-8">
         <title>Dateiliste</title>
         <link rel="stylesheet" href="css/bootstrap.css" media="screen">
-        <link rel="stylesheet" href="css/bootswatch.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
     </head>
     <body >
         <div class="navbar navbar-default">

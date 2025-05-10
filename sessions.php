@@ -7,7 +7,8 @@
 
 	function startSession($pass)
 	{
-		$pass = htmlentities($pass);
+
+		$pass = htmlentities((string)$pass, ENT_QUOTES, 'UTF-8');
 		global $security;
 		if($security == 1)
 		{

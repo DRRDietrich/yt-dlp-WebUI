@@ -3,7 +3,8 @@
     require_once("sessions.php");
     require_once("utilities.php");
 
-    startSession($_POST['passwd']);
+    $passwd = $_POST['passwd'] ?? '';
+    startSession($passwd);
     if(isset($_GET['logout']) && $_GET['logout'] == 1) endSession();
 ?>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
         <meta charset="utf-8">
         <title>WebUI</title>
         <link rel="stylesheet" href="css/bootstrap.css" media="screen">
-        <link rel="stylesheet" href="css/bootswatch.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
     </head>
     <body>
         <div class="navbar navbar-default">
@@ -38,9 +39,8 @@
     {
         $url = $_GET['url'];
 	$format = $_GET['f'];
-	$playlist = $_GET['playlist'];
 	$plylst = '--no-playlist';
-	if (isset($playlist)) {
+	if (isset($_GET['playlist'])) {
 		$plylst = '--yes-playlist';
 	} 
 	switch ($format) {

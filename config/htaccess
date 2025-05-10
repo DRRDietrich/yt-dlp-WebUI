@@ -2,7 +2,7 @@ SetEnvIfNoCase Request_URI "featured_" noauth
 
 AuthType Basic
 AuthName "Passwortgeschützter Bereich."
-AuthUserFile /PATH/TO/YOUTUBE-DL-WebUI/.htpasswd
+AuthUserFile /var/www/html/.htpasswd
 Require valid-user
 
 Order Deny,Allow

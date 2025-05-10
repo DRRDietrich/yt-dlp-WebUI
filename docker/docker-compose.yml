@@ -1,0 +1,15 @@
+services:
+  yt-dlp-webui:
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    container_name: yt-dlp-WebUI
+    ports:
+      - "8080:80"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ../config/.htaccess:/var/www/html/.htaccess
+      - ../config/.htpasswd:/var/www/html/.htpasswd
+      - ../config/config.php:/var/www/html/config.php
+      - ../videos:/var/www/html/videos
+    restart: unless-stopped
